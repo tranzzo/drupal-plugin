@@ -1,0 +1,15 @@
+commerce_payment.commerce_payment_gateway.plugin.commerce_tranzzo:
+  type: commerce_payment_gateway_configuration
+  mapping:
+      POS_ID:
+        type: string
+        label: 'POS_ID'
+      API_KEY:
+        type: string
+        label: 'API_KEY'
+      API_SECRET:
+        type: string
+        label: 'API_SECRET'
+      ENDPOINTS_KEY:
+        type: string
+        label: 'ENDPOINTS_KEY Id'

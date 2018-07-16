@@ -113,7 +113,7 @@ class OffsiteRedirect extends OffsitePaymentGatewayBase {
         }
         $amount_payment = $tranzzo::amountToDouble($data_response[$tranzzo::P_REQ_AMOUNT]);
         $amount_order = $tranzzo::amountToDouble($order->getTotalPrice()->getNumber());
-        if ($data_response[$tranzzo::P_RES_RESP_CODE] == 1000 && ($amount_payment == $amount_order)) {
+        if ($data_response[$tranzzo::P_RES_RESP_CODE] == 1000 && ($amount_payment >= $amount_order)) {
           $order->set('state', 'completed');
           $order->save();
           // Создаём платёж и сохраняем его

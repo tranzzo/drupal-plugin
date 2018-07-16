@@ -104,7 +104,7 @@ class OffsiteRedirect extends OffsitePaymentGatewayBase {
       $data_response = json_decode($tranzzo::base64url_decode($data), true);
       \Drupal::logger('tranzzo')
         ->notice('Получено оповещение о заказе с следующими данными: @data', ['@data' => print_r($data_response, TRUE)]);
-      $order_id = (int)$data_response[$tranzzo::P_REQ_ORDER];
+      $order_id = (int)$data_response[$tranzzo::P_REQ_ORDER_ANSW];
       if($tranzzo->validateSignature($data, $signature) && $order_id) {
         $order_storage = $this->entityTypeManager->getStorage('commerce_order');
         $order = $order_storage->load($order_id);

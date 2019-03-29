@@ -10,3 +10,4 @@
 1. Получите ключи авторизации и идентификации сервиса Tranzzo (POS_ID, API_KEY, API_SECRET, ENDPOINTS_KEY).
 2. Переходим в Commerce->Конфигурация->Payment Gateway->Add Payment Gateway и выбираем плагин Tranzzo. 
 3. Вводим Name и ключи Tranzzo, переключаем на режим Live и нажимаем сохранить. 
+4. Переходим в Commerce->Конфигурация->Типы заказов, редактируем тип Default, выбираем Поряд действий "Fulfillment, with validation"

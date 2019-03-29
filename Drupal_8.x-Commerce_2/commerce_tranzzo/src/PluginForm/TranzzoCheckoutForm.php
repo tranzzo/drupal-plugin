@@ -21,10 +21,13 @@ class TranzzoCheckoutForm extends BasePaymentOffsiteForm {
     $extra = [
       'return_url' => $form['#return_url'],
       'server_url' => $base_url . '/payment/notify/tranzzo',
-      'capture' => $form['#capture'],
+        //new
+      'capture' => $form['#capture'],//new
     ];
+
     $tranzzo_response = $payment_gateway_plugin->setTranzzoCheckout($payment, $extra);
-    $order = $payment->getOrder();
+
+      $order = $payment->getOrder();
     $order->setData('commerce_tranzzo', [
       'redirect_url' => $tranzzo_response['redirect_url'],
     ]);

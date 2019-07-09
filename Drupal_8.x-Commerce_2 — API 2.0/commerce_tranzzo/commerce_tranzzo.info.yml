@@ -1,0 +1,7 @@
+name: Commerce Payment Tranzzo
+type: module
+description: 'Payment via Tranzzo'
+package: Commerce
+core: 8.x
+dependencies:
+  - commerce:commerce_payment

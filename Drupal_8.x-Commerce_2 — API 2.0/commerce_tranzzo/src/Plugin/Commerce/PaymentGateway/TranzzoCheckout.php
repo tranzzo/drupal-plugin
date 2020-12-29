@@ -365,7 +365,7 @@ class TranzzoCheckout extends OffsitePaymentGatewayBase implements TranzzoChecko
             //new
             //$order_id = (int)$data_response['provider_order_id'];
             if ($data_response['method'] == 'purchase' || $data_response['method'] == 'auth') {
-                $order_id = (int)$data_response['provider_order_id'];
+                $order_id = (int)$data_response['order_id'];
             } else {
                 $tranzo_id = (int)$data_response['order_id'];
                 self::writeLog('$tranzo_id', $tranzo_id);
@@ -386,7 +386,7 @@ class TranzzoCheckout extends OffsitePaymentGatewayBase implements TranzzoChecko
                 $amount = $this->rounder->round($order->getTotalPrice());
                 $amount_order = $amount->getNumber();
                 $amount_paid = $order->getTotalPaid()->getNumber();
-                if (!empty($data_response['response_code']) && $data_response['response_code'] == 1000 && ($amount_payment >= $amount_order)) {
+                if (!empty($data_response['status_code']) && $data_response['status_code'] == 1000 && ($amount_payment >= $amount_order)) {
                     self::writeLog('1000', '');
                     self::writeLog(array('locked' => (array)$order->isLocked()));
                     // Меняем статус ORDER'а и сохраняем его
@@ -428,7 +428,7 @@ class TranzzoCheckout extends OffsitePaymentGatewayBase implements TranzzoChecko
                     //new
                     $payment->save();
                 }// auth
-                elseif (!empty($data_response['response_code']) && $data_response['response_code'] == 1002 && ($amount_payment >= $amount_order)) {
+                elseif (!empty($data_response['status_code']) && $data_response['status_code'] == 1002 && ($amount_payment >= $amount_order)) {
                     self::writeLog('1002', '');
                     // Создаём платёж и сохраняем его
                     $payment_storage = $this->entityTypeManager->getStorage('commerce_payment');
@@ -485,7 +485,7 @@ class TranzzoCheckout extends OffsitePaymentGatewayBase implements TranzzoChecko
 //                    $order->save();
                     \Drupal::logger('tranzzo')->notice('Заблокированные средства списаны успешно');
                 } // capture
-                elseif (!empty($data_response['response_code']) && $data_response['response_code'] == 2122) {
+                elseif (!empty($data_response['status_code']) && $data_response['status_code'] == 2122) {
 //                    \Drupal::logger('tranzzo')->notice('Ожидание оплаты');
                 } //new
                 else {
